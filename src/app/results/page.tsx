@@ -27,12 +27,13 @@ export default function Home() {
   const params = useSearchParams();
   const [query, setQuery] = useState('');
   const router = useRouter();
+  const maxCount = 12;
 
 
   useEffect(()=>{
     const fetchData = async (query:string) => {
       try{
-        const response = await getData(count, query);
+        const response = await getData(count, query, maxCount);
         setData(prev => [...prev, ...response]);
       }catch(e){
         console.log(e);
@@ -49,7 +50,7 @@ export default function Home() {
   },[count]);
 
   const handleLoadMore = () =>{
-    setCount((prev)=>prev+6);
+    setCount((prev)=>prev+maxCount);
   }
   const handleGoback = () =>{
     router.back();
