@@ -60,7 +60,8 @@ export default function Home() {
     <SuspenseHandler>
       <div className="w-full text-center py-5 mt-5 text-2xl font-bold text-slate-600 grid grid-cols-1">
         <div className="ms-14 absolute md:block hidden cursor-pointer" onClick={handleGoback}>Go Back</div>
-        <div className="justify-self-center">Showing Results For: {query}({count+12})</div> 
+        <div className="justify-self-center">Showing Results For: {query}</div> 
+        <div className="me-14 absolute md:block hidden justify-self-end">Results:{count+12}</div>
       </div>
     <div className="pb-10">
       <Card data={data}/>
