@@ -20,7 +20,7 @@ export default async function getData(page:number, query:string) {
 
   for (const item of items) {
     let title = item.volumeInfo.title;
-    let image = item.volumeInfo.imageLinks.thumbnail;
+    let image = item.volumeInfo.imageLinks?.thumbnail || 'https://www.bookdeal.com/images/no-image.png';
     let description = item.volumeInfo.description;
     let link = item.volumeInfo.infoLink;
 
