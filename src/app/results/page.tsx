@@ -3,6 +3,7 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import Card from "../components/Card";
 import getData from "../lib/data";
+import { useSearchParams } from "next/navigation";
 
 
 interface RData{
@@ -23,18 +24,20 @@ export default function Home() {
   const [count, setCount] = useState(0);
   const [data, setData] = useState<RData[]>([]);
   const initialRender = useRef(true);
+  const params = useSearchParams();
 
   useEffect(()=>{
-    const fetchData = async () => {
+    const fetchData = async (query:string) => {
       try{
-        const response = await getData(count);
+        const response = await getData(count, query);
         setData(prev => [...prev, ...response]);
       }catch(e){
         console.log(e);
       }
     }
     if (!initialRender.current) {
-      fetchData();
+      const query:string = params.get('q')|| 'quilting';
+      fetchData(query);
     } else {
       initialRender.current = false;
     }
@@ -48,7 +51,7 @@ export default function Home() {
   return (
     <SuspenseHandler>
       
-    <div>
+    <div className="pb-10">
       <Card data={data}/>
       <div className="text-center">
         <button className="rounded-full bg-black text-white py-4 px-10 hover:bg-slate-800" onClick={handleLoadMore}>Load More</button>

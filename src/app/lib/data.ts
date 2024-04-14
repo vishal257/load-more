@@ -1,6 +1,6 @@
-export default async function getData(page:number) {
+export default async function getData(page:number, query:string) {
   const res = await fetch(
-    `https://www.googleapis.com/books/v1/volumes?q=quilting&startIndex=${page}&maxResults=6`
+    `https://www.googleapis.com/books/v1/volumes?q=${query}&startIndex=${page}&maxResults=6`
   );
   const response = await res.json();
   const data = [];
