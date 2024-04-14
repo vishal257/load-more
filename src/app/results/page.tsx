@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import Card from "../components/Card";
 import getData from "../lib/data";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 
 interface RData{
@@ -26,6 +26,8 @@ export default function Home() {
   const initialRender = useRef(true);
   const params = useSearchParams();
   const [query, setQuery] = useState('');
+  const router = useRouter();
+
 
   useEffect(()=>{
     const fetchData = async (query:string) => {
@@ -49,11 +51,14 @@ export default function Home() {
   const handleLoadMore = () =>{
     setCount((prev)=>prev+6);
   }
+  const handleGoback = () =>{
+    router.back();
+  }
 
   return (
     <SuspenseHandler>
       <div className="w-full text-center py-5 mt-5 text-2xl font-bold text-slate-600 grid grid-cols-1">
-        <div className="ms-14 absolute md:block hidden">Go Back</div>
+        <div className="ms-14 absolute md:block hidden cursor-pointer" onClick={handleGoback}>Go Back</div>
         <div className="justify-self-center">Showing Results For: {query}</div> 
       </div>
     <div className="pb-10">
