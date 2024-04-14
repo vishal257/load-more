@@ -25,6 +25,7 @@ export default function Home() {
   const [data, setData] = useState<RData[]>([]);
   const initialRender = useRef(true);
   const params = useSearchParams();
+  const [query, setQuery] = useState('');
 
   useEffect(()=>{
     const fetchData = async (query:string) => {
@@ -37,6 +38,7 @@ export default function Home() {
     }
     if (!initialRender.current) {
       const query:string = params.get('q')|| 'quilting';
+      setQuery(query);
       fetchData(query);
     } else {
       initialRender.current = false;
@@ -50,7 +52,7 @@ export default function Home() {
 
   return (
     <SuspenseHandler>
-      
+      <div className="w-full text-center py-5 mt-5 text-2xl font-bold text-slate-600">Showing Results For: {query}</div>
     <div className="pb-10">
       <Card data={data}/>
       <div className="text-center">
