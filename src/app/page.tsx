@@ -1,9 +1,17 @@
 import SearchBar from "./components/SearchBar";
+import localFont from "next/font/local";
 
-export default function Entry(){
-  return(
-    <div>
-      <SearchBar/>
+const newFont = localFont(
+  {
+     src: "./mangueiraalt-alt.otf",
+     variable: '--new-font'
+    }
+  );
+
+export default function Entry() {
+  return (
+    <div className={`${newFont.variable} font-sans`}>
+      <SearchBar />
     </div>
-  )
+  );
 }
