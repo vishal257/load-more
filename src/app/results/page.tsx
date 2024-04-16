@@ -40,13 +40,16 @@ function HomeHandler() {
         console.log(e);
       }
     }
-    if (!initialRender.current) {
-      const query:string = params.get('q')|| 'quilting';
-      setQuery(query);
-      fetchData(query);
-    } else {
-      initialRender.current = false;
-    }
+    const query:string = params.get('q')|| 'quilting';
+    setQuery(query);
+    fetchData(query);
+    // if (!initialRender.current) {
+    //   const query:string = params.get('q')|| 'quilting';
+    //   setQuery(query);
+    //   fetchData(query);
+    // } else {
+    //   initialRender.current = false;
+    // }
 
   },[count]);
 
